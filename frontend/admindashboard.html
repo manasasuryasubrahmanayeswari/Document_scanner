@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="admin.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Admin Dashboard</h2>
+                <button id="logoutBtn" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition">Logout</button>
+            </div>
+
+            <!-- Analytics Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold text-blue-700">Total Users</h3>
+                    <p id="totalUsers" class="text-2xl font-bold">-</p>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold text-green-700">Total Documents</h3>
+                    <p id="totalDocuments" class="text-2xl font-bold">-</p>
+                </div>
+                <div class="bg-yellow-50 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold text-yellow-700">Today's Activities</h3>
+                    <p id="todayActivities" class="text-2xl font-bold">-</p>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold text-purple-700">Pending Requests</h3>
+                    <p id="pendingRequests" class="text-2xl font-bold">-</p>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="border-b border-gray-200 mb-6">
+                <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                    <button onclick="switchTab('creditRequests')" class="tab-button border-b-2 border-transparent px-1 py-4 text-sm font-medium">
+                        Credit Requests
+                    </button>
+                    <button onclick="switchTab('userManagement')" class="tab-button border-b-2 border-transparent px-1 py-4 text-sm font-medium">
+                        User Management
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Credit Requests Tab -->
+            <div id="creditRequestsTab" class="tab-content">
+                <h3 class="text-xl font-semibold mb-4">Pending Credit Requests</h3>
+                <div id="creditRequests" class="space-y-4">
+                    <!-- Credit requests will be listed here -->
+                </div>
+            </div>
+
+            <!-- User Management Tab -->
+            <div id="userManagementTab" class="tab-content hidden">
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold mb-4">Promote User to Admin</h3>
+                    <form id="promoteForm" class="space-y-4 max-w-md">
+                        <input type="email" id="promoteEmail" placeholder="User Email" class="w-full px-4 py-2 border rounded-md" required>
+                        <input type="password" id="adminPassword" placeholder="Admin Password" class="w-full px-4 py-2 border rounded-md" required>
+                        <button type="submit" class="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600 transition">
+                            Promote to Admin
+                        </button>
+                    </form>
+                    <p id="promoteError" class="text-red-500 mt-2 hidden"></p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">All Users</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border rounded-lg">
+                            <thead>
+                                <tr>
+                                    <th class="px-6 py-3 border-b text-left">Username</th>
+                                    <th class="px-6 py-3 border-b text-left">Email</th>
+                                    <th class="px-6 py-3 border-b text-left">Role</th>
+                                    <th class="px-6 py-3 border-b text-left">Credits</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersList">
+                                <!-- Users will be listed here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

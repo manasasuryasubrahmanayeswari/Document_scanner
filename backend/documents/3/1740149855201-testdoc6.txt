@@ -1,0 +1,4 @@
+Machine learning and artificial intelligence are revolutionizing different fields.  
+They enable computers to analyze data and make informed decisions without direct programming.  
+Supervised learning requires labeled datasets, whereas unsupervised learning finds patterns autonomously.  
+Deep learning uses artificial neural networks to extract meaningful insights from complex datasets.

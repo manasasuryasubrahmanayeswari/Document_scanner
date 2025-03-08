@@ -1,0 +1,4 @@
+Machine learning is a branch of artificial intelligence that enables computers to learn from data. 
+It is widely applied in areas such as image processing, natural language understanding, and recommendation engines. 
+Supervised learning and unsupervised learning are two fundamental approaches in machine learning.
+Deep learning is an advanced form of machine learning that relies on neural networks to analyze data.

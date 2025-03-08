@@ -1,0 +1,97 @@
+# Create a new NS simulator
+set ns [new Simulator]
+
+# Define trace file
+set tracefile [open ahpcbp.tr w]
+$ns trace-all $tracefile
+
+# Define NAM file for visualization
+set namfile [open ahpcbp.nam w]
+$ns namtrace-all $namfile
+
+# Set up topography
+set topo [new Topography]
+$topo load_flatgrid 500 500  ;# 500x500 area
+
+# Define energy model
+set energyModel "EnergyModel"
+set initialEnergy 100
+set rxPower 0.3
+set txPower 0.6
+set idlePower 0.05
+
+# Create the node configuration with energy model
+$ns node-config -adhocRouting AODV \
+               -llType LL \
+               -macType Mac/802_11 \
+               -ifqType Queue/DropTail/PriQueue \
+               -ifqLen 50 \
+               -antType Antenna/OmniAntenna \
+               -propType Propagation/TwoRayGround \
+               -phyType Phy/WirelessPhy \
+               -topoInstance $topo \
+               -agentTrace ON \
+               -routerTrace ON \
+               -macTrace OFF
+
+# Create nodes and set initial energy
+set nodes {}
+for {set i 0} {$i < 10} {incr i} {
+    set node($i) [$ns node]
+    $node($i) set X_ [expr {rand()*500}]
+    $node($i) set Y_ [expr {rand()*500}]
+    $node($i) set Z_ 0.0
+    $node($i) add-energy $initialEnergy
+    lappend nodes $node($i)
+}
+
+# Define cluster head selection function
+proc selectClusterHead {} {
+    global nodes ns
+    set highestEnergy 0
+    set clusterHead {}
+
+    foreach n $nodes {
+        set energy [$n energy]
+        if {$energy > $highestEnergy} {
+            set highestEnergy $energy
+            set clusterHead $n
+        }
+    }
+    puts "Selected Cluster Head: [$clusterHead id]"
+    return $clusterHead
+}
+
+# Assign cluster head
+set clusterHead [selectClusterHead]
+$clusterHead color red
+
+# Create UDP agent for data transmission
+set udp [new Agent/UDP]
+$ns attach-agent $clusterHead $udp
+set sink [new Agent/Null]
+$ns attach-agent [lindex $nodes 1] $sink
+$ns connect $udp $sink
+
+# Setup a periodic CBR traffic source
+set cbr [new Application/Traffic/CBR]
+$cbr attach-agent $udp
+$cbr set packetSize_ 512
+$cbr set interval_ 0.5
+$ns at 1.0 "$cbr start"
+
+# Schedule end of simulation
+$ns at 10.0 "finish"
+
+# Finish function to close trace files
+proc finish {} {
+    global ns tracefile namfile
+    $ns flush-trace
+    close $tracefile
+    close $namfile
+    puts "Simulation Complete. Run NAM to visualize."
+    exit 0
+}
+
+# Run the simulation
+$ns run

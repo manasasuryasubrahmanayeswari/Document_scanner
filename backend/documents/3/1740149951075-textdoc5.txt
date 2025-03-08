@@ -1,0 +1,4 @@
+Artificial intelligence and machine learning are transforming various industries.  
+These technologies allow systems to learn from data and make decisions with minimal human intervention.  
+Supervised learning involves labeled data, while unsupervised learning identifies patterns without predefined labels.  
+Deep learning, a subset of machine learning, relies on neural networks for processing and decision-making.

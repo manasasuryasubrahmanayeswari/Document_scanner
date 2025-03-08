@@ -1,0 +1,4 @@
+Machine learning is a field of artificial intelligence that uses algorithms to learn patterns from data. 
+It is widely used in various applications, including image recognition, natural language processing, and recommendation systems. 
+Supervised learning and unsupervised learning are two main types of machine learning.
+Deep learning is a subset of machine learning that uses neural networks to process complex data.

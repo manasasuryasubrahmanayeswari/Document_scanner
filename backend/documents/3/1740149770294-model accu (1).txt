@@ -1,0 +1,31 @@
+lstm+mobilenet
+Accuracy: 0.9249
+Precision: 0.9232
+Recall: 0.9191
+F1-score: 0.9211
+
+CNN+LSTM
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.92      0.93      0.92     12391
+           1       0.92      0.91      0.92     11317
+
+    accuracy                           0.92     23708
+   macro avg       0.92      0.92      0.92     23708
+weighted avg       0.92      0.92      0.92     23708
+
+Confusion Matrix:
+ [[11465   926]
+ [  982 10335]]
+
+efficient_b2+customclassifier 96.73
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.86      0.94      0.90     12391
+           1       0.93      0.83      0.88     11317
+
+    accuracy                           0.89     23708
+   macro avg       0.89      0.89      0.89     23708
+weighted avg       0.89      0.89      0.89     23708
